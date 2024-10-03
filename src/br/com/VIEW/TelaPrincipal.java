@@ -5,6 +5,8 @@
  */
 package br.com.VIEW;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aluno.saolucas
@@ -28,35 +30,118 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuCadastro = new javax.swing.JMenu();
+        sMenuUsuarios = new javax.swing.JMenuItem();
+        sMenuClientes = new javax.swing.JMenuItem();
+        menuOpcoes = new javax.swing.JMenu();
+        sSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Usuários");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tela Principal");
+
+        menuCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/register_icon.png"))); // NOI18N
+        menuCadastro.setText("Cadastro");
+        menuCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroActionPerformed(evt);
+            }
+        });
+
+        sMenuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user_icon.png"))); // NOI18N
+        sMenuUsuarios.setText("Usuários");
+        sMenuUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sMenuUsuariosActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(sMenuUsuarios);
+
+        sMenuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/client_icon.png"))); // NOI18N
+        sMenuClientes.setText("Clientes");
+        sMenuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sMenuClientesActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(sMenuClientes);
+
+        jMenuBar1.add(menuCadastro);
+
+        menuOpcoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/options_icon.png"))); // NOI18N
+        menuOpcoes.setText("Opções");
+        menuOpcoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuOpcoesActionPerformed(evt);
+            }
+        });
+
+        sSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/out_icon.png"))); // NOI18N
+        sSair.setText("Sair");
+        sSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sSairActionPerformed(evt);
+            }
+        });
+        menuOpcoes.add(sSair);
+
+        jMenuBar1.add(menuOpcoes);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
+                .addGap(170, 170, 170)
                 .addComponent(jLabel1)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void sMenuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sMenuUsuariosActionPerformed
+        TelaUsuarios tUsuarios = new TelaUsuarios();
+        tUsuarios.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_sMenuUsuariosActionPerformed
+
+    private void menuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCadastroActionPerformed
+
+    private void sSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sSairActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?",
+                "Saida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            dispose();
+        }
+    }//GEN-LAST:event_sSairActionPerformed
+
+    private void menuOpcoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuOpcoesActionPerformed
+
+
+    }//GEN-LAST:event_menuOpcoesActionPerformed
+
+    private void sMenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sMenuClientesActionPerformed
+        TelaClientes tClientes = new TelaClientes();
+        tClientes.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_sMenuClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,5 +180,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu menuCadastro;
+    private javax.swing.JMenu menuOpcoes;
+    private javax.swing.JMenuItem sMenuClientes;
+    private javax.swing.JMenuItem sMenuUsuarios;
+    private javax.swing.JMenuItem sSair;
     // End of variables declaration//GEN-END:variables
 }
