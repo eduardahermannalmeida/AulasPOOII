@@ -29,6 +29,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos.");
+                txtUsuario.setText(null);
+                txtSenha.setText(null);
             } 
         } catch (Exception e){
                     JOptionPane.showMessageDialog(null, "tela Login" + e);
