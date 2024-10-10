@@ -304,11 +304,11 @@ public class TelaClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField txtCPFCNPJ;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtEndereco;
-    private javax.swing.JTextField txtIDUsuario;
-    private javax.swing.JTextField txtNomeCliente;
-    private javax.swing.JTextField txtTelefone;
+    public static javax.swing.JTextField txtCPFCNPJ;
+    public static javax.swing.JTextField txtEmail;
+    public static javax.swing.JTextField txtEndereco;
+    public static javax.swing.JTextField txtIDUsuario;
+    public static javax.swing.JTextField txtNomeCliente;
+    public static javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

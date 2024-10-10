@@ -2,6 +2,8 @@ package br.com.VIEW;
 
 import java.sql.*;
 import br.com.DAO.ConexaoDAO;
+import br.com.DAO.UsuarioDAO;
+import br.com.DTO.UsuarioDTO;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -11,31 +13,7 @@ public class TelaLogin extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    
-            public void logar() {
-        String sql = "select * from tb_usuarios where login = ? and senha = ?";
-        try {
-            // preparar a consulta no banco, em função ao que foi inserido nas caixas de texto
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtUsuario.getText());
-            pst.setString(2, txtSenha.getText());
-            
-            // executa a query
-            rs = pst.executeQuery();
-            // verifica se existe usuário
-            if (rs.next()){
-                TelaPrincipal principal = new TelaPrincipal();
-                principal.setVisible(true);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos.");
-                txtUsuario.setText(null);
-                txtSenha.setText(null);
-            } 
-        } catch (Exception e){
-                    JOptionPane.showMessageDialog(null, "tela Login" + e);
-                    }
-    }
+
 
     public TelaLogin() {
         initComponents();
@@ -65,9 +43,9 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        txtSenha = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         lblIcone = new javax.swing.JLabel();
+        txtSenha = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
@@ -90,6 +68,12 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,14 +84,13 @@ public class TelaLogin extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblIcone, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtUsuario)
-                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(txtSenha))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -137,13 +120,25 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-    logar();
+        String login_usuario = txtUsuario.getText();
+        String senha_usuario = txtSenha.getText();
+        
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        objUsuarioDTO.setLoginUsuario(login_usuario);
+        objUsuarioDTO.setSenhaUsuario(senha_usuario);
+        
+        UsuarioDAO uDao = new UsuarioDAO();
+        uDao.logar(objUsuarioDTO);
     }//GEN-LAST:event_btnLoginActionPerformed
 
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSenhaActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -154,28 +149,24 @@ public static void main(String args[]) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaLogin.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(TelaLogin.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(TelaLogin.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaLogin.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -192,7 +183,7 @@ public static void main(String args[]) {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblIcone;
-    private javax.swing.JTextField txtSenha;
-    private javax.swing.JTextField txtUsuario;
+    public static javax.swing.JTextField txtSenha;
+    public static javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
